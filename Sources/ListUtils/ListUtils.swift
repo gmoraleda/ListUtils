@@ -1,9 +1,9 @@
 public struct ListUtils {
   
   public let file: String
-  public let target: Double
+  public let target: String
   
-  public init(file: String, target: Double) {
+  public init(file: String, target: String) {
     self.file = file
     self.target = target
   }
