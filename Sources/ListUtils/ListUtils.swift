@@ -9,7 +9,7 @@ public struct ListUtils {
     self.target = target
   }
 
-  func loadList() -> [Int] {
+  public func loadList() -> [Int] {
     do {
       let file = try String(contentsOfFile: self.file, encoding: String.Encoding.utf8)
       let list: [String] = file.components(separatedBy: "\n")
@@ -21,7 +21,7 @@ public struct ListUtils {
     }
   }
 
-  func searchForCandidates(data: [Int]) -> [Int: Int] {
+  public func searchForCandidates(data: [Int]) -> [Int: Int] {
     var result = [Int: Int]()
     for x in data {
       if data.index(of: target - x) != nil {
@@ -32,7 +32,7 @@ public struct ListUtils {
     return result
   }
 
-  func printResult(result: [Int: Int]) {
+  public func printResult(result: [Int: Int]) {
     if result.count > 0 {
       print("\n*********************" + "\n   Matching Pairs:\n" + "*********************\n")
       result.forEach { print($0) }
