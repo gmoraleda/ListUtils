@@ -2,19 +2,11 @@ import Foundation
 public struct ListUtils {
   
   public let file: String
-  public let target: String
+  public let target: Int
   
-  public init(file: String, target: String) {
+  public init(file: String, target: Int) {
     self.file = file
     self.target = target
-  }
-  
-  func checkTarget() -> Bool {
-    if Int(self.target) != nil { return true }
-    else {
-      NSLog("Target not valid")
-      return false
-    }
   }
   
   func loadList() -> Bool {
@@ -22,9 +14,7 @@ public struct ListUtils {
       let file = try String(contentsOfFile: self.file, encoding: String.Encoding.utf8)
       let list: [String] = file.components(separatedBy: "\n")
       let parsedList = list.map { Int($0) ?? 0 }
-      if checkTarget() {
-        searchForCandidates(list: parsedList)
-      }
+      searchForCandidates(list: parsedList.sorted())
       return true
     } catch {
       Swift.print("Error while loading file")
@@ -32,9 +22,29 @@ public struct ListUtils {
     }
   }
   
-  func searchForCandidates(list: [Int]) {
-    
-    
+  func searchForCandidates(list: [Int]) -> Bool {
+    var result = [Int:Int]()
+    for (i, x) in list.enumerated() {
+      for y in list[i+1 ..< list.count] {
+        if x + y == target {
+          result[x]=y
+        }
+        if x + y > target {
+          break
+        }
+      }
+    }
+    if result.count > 0 { return true }
+      else { return false }
+  }
+  
+  func printResult(result: [Int:Int]) {
+    if result.count > 0 {
+    print("Matching pairs:")
+    result.forEach { print($0) }
+    } else {
+      print("No matching pairs found")
+    }
   }
 }
 
