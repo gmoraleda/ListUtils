@@ -8,10 +8,11 @@ class ListUtilsTests: XCTestCase {
   
   func testSearchCandidatesBig() {
     let lu = ListUtils(file: BIG_FILE, target: 465)
-    let list = lu.loadList()
+    if let list = lu.loadList() {
     let result = lu.searchForCandidates(data: list)
     XCTAssertTrue(result.count>0)
     XCTAssertNotNil(lu.printResult(result: result))
+    }
   }
   
   func testSearchCandidatesSmall() {
@@ -23,7 +24,7 @@ class ListUtilsTests: XCTestCase {
   
   func testLoadList() {
     let lu = ListUtils(file: "XYZ", target: 40)
-    XCTAssertFalse(lu.loadList().count>0)
+    XCTAssertNil(lu.loadList())
   }
 
   static var allTests = [

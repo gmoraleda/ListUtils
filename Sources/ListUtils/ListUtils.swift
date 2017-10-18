@@ -9,7 +9,7 @@ public struct ListUtils {
     self.target = target
   }
 
-  public func loadList() -> [Int] {
+  public func loadList() -> [Int]? {
     do {
       let file = try String(contentsOfFile: self.file, encoding: String.Encoding.utf8)
       let list: [String] = file.components(separatedBy: "\n")
@@ -17,7 +17,7 @@ public struct ListUtils {
       return data
     } catch {
       NSLog("Error while loading file")
-      return []
+      return nil
     }
   }
 
