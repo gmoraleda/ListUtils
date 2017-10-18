@@ -2,15 +2,20 @@ import XCTest
 @testable import ListUtils
 
 class ListUtilsTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(ListUtils().text, "Hello, World!")
-    }
+  func loadFileTest() {
+    XCTAssertTrue(ListUtils(file: "/Users/guille/Documents/PayBackCodingChallenge/ListUtils/Tests/testfile.txt", target: "").loadList())
+  }
 
+//  func checkTargetTest() {
+//    XCTAssertTrue(ListUtils(file: "", target: "24").checkTarget())
+//  }
+}
 
-    static var allTests = [
-        ("testExample", testExample),
+extension ListUtilsTests {
+  static var allTests : [(String, (ListUtilsTests) -> () throws -> Void)] {
+    return [
+      ("loadFileTest", loadFileTest)
+      //("checkTargetTest", checkTargetTest)
     ]
+  }
 }
