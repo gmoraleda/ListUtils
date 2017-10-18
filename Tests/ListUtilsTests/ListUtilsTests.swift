@@ -3,7 +3,7 @@ import XCTest
 
 class ListUtilsTests: XCTestCase {
   
-  private let BIG_FILE = "/Users/guille/Documents/PayBackCodingChallenge/ListUtils/Tests/test.txt"
+  private let BIG_FILE = "/Users/guille/Documents/PayBackCodingChallenge/ListUtils/Tests/test.txt" //Edit with your correct path
   private let SMALL = [1,2,45,23,12,45,234,0,32,33,50]
   
   func testSearchCandidatesBig() {
