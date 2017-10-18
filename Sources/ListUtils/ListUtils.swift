@@ -3,47 +3,38 @@ public struct ListUtils {
 
   private let file: String
   private let target: Int
-  private var data = [Int]()
-  private var result = [Int: Int]()
 
   public init(file: String, target: Int) {
     self.file = file
     self.target = target
-    if loadList() {
-      NSLog("Data loaded")
-    }
   }
 
-  mutating func loadList() -> Bool{
+  func loadList() -> [Int] {
     do {
       let file = try String(contentsOfFile: self.file, encoding: String.Encoding.utf8)
       let list: [String] = file.components(separatedBy: "\n")
-      data = list.map { Int($0) ?? 0 }
-      return true
+      let data = list.map { Int($0) ?? 0 }
+      return data
     } catch {
       NSLog("Error while loading file")
-      return false
+      return []
     }
   }
 
-  mutating func searchForCandidates() -> Bool {
-    for (i, x) in data.enumerated() {
-      for y in data[i + 1 ..< data.count] {
-        if x + y == target {
-          result[x] = y
-        }
-        if x + y > target {
-          break
-        }
+  func searchForCandidates(data: [Int]) -> [Int: Int] {
+    var result = [Int: Int]()
+    for x in data {
+      if data.index(of: target - x) != nil {
+        if result[target - x] != nil { break }
+        result[x] = target - x
       }
     }
-    if result.count > 0 { return true }
-      else { return false }
+    return result
   }
 
-  func printResult() {
+  func printResult(result: [Int: Int]) {
     if result.count > 0 {
-      print("\n*********************"+"\n   Matching Pairs:\n"+"*********************\n")
+      print("\n*********************" + "\n   Matching Pairs:\n" + "*********************\n")
       result.forEach { print($0) }
     } else {
       print("No matching pairs found")
