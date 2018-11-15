@@ -11,7 +11,7 @@ public struct ListUtils {
 
   public func loadList() -> [Int]? {
     do {
-      let file = try String(contentsOfFile: self.file, encoding: String.Encoding.utf8)
+      let file = try String(contentsOfFile: self.file, encoding: .utf8)
       let list: [String] = file.components(separatedBy: "\n")
       let data = list.map { Int($0) ?? 0 }
       return data
@@ -41,4 +41,3 @@ public struct ListUtils {
     }
   }
 }
-
