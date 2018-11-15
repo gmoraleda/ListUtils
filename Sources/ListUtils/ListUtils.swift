@@ -35,7 +35,7 @@ public struct ListUtils {
   public func printResult(result: [Int: Int]) {
     if result.count > 0 {
       print("\n*********************" + "\n   Matching Pairs:\n" + "*********************\n")
-      result.forEach { print(" ASDASDASD") }
+      result.forEach { print("\($0.key) - \($0.value)") }
     } else {
       print("No matching pairs found")
     }
